@@ -4,7 +4,7 @@ use warnings;
 
 use Exporter qw(import);
 
-our @EXPORT_OK = qw(Average Median Percentile);
+our @EXPORT_OK = qw(Average Median Count Min Max Percentile);
 
 =pod
 
@@ -53,6 +53,62 @@ sub Average {
     }
 
 return $avgval;   
+}
+
+sub Count {
+    # read a comma-delimited list of numbers, split into a numerical array, return a count of elements
+    my $numlist = shift;
+    my $mycount = 0;
+
+    my @vals = split /\,/, $numlist;
+
+    $mycount = $#vals + 1;
+    
+return $mycount;   
+}
+
+sub Min {
+    # read a comma-delimited list of numbers, split into a numerical array, find and return min value
+    my $numlist = shift;
+    my $minval;
+    my $mycount;
+
+    my @vals = split /\,/, $numlist;
+    $mycount = $#vals + 1;
+    if($mycount > 0) {
+	$minval = $vals[0];
+	for(my $i = 0; $i <= $#vals; $i++) {
+	    if ($minval > $vals[$i]) {
+		$minval = $vals[$i];
+	    }
+	}
+    } else {
+	$minval = -999999;
+    }
+
+return $minval;   
+}
+
+sub Max {
+    # read a comma-delimited list of numbers, split into a numerical array, find and return max value
+    my $numlist = shift;
+    my $maxval;
+    my $mycount;
+
+    my @vals = split /\,/, $numlist;
+    $mycount = $#vals + 1;
+    if($mycount > 0) {
+	$maxval = $vals[0];
+	for(my $i = 0; $i <= $#vals; $i++) {
+	    if ($maxval < $vals[$i]) {
+		$maxval = $vals[$i];
+	    }
+	}
+    } else {
+	$maxval = -999999;
+    }
+
+return $maxval;   
 }
 
 sub Percentile {
