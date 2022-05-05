@@ -1,5 +1,6 @@
 import html.entities, re, sys
-
+# https://www.w3schools.com/charsets/ref_html_utf8.asp
+# 
 def ucode(c):
     retval = "\\u" + ("0000" + hex(c)[2:])[-4:] 
     return retval
