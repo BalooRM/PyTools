@@ -37,15 +37,15 @@ input("Press Enter to continue...")
 
 #sys.exit('Goodbye')
 
-merger = PyPDF2.PdfFileMerger()
-writer = PyPDF2.PdfFileWriter()
+merger = PyPDF2.PdfMerger()
+writer = PyPDF2.PdfWriter()
 
 for pdf in pdfs:
-    reader = PyPDF2.PdfFileReader(pdf)
-    for i in range(reader.numPages):
-        page = reader.getPage(i)
-        page.compressContentStreams()
-        writer.addPage(page)
+    reader = PyPDF2.PdfReader(pdf)
+    for i in range(len(reader.pages)):
+        page = reader.pages[i]
+        page.compress_content_streams()
+        writer.add_page(page)
     merger.append(pdf)
 
 merger.write('Scan2merge.pdf')
